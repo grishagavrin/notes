@@ -1,5 +1,3 @@
-import { useCallback, useEffect, useRef } from "react";
-
 const useThrottling = () => {
   useEffect(() => {
     document.addEventListener("scroll", scrollThrottle);
