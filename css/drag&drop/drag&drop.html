@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .zone1,
+      .zone2 {
+        float: left;
+        width: 100px;
+        height: 35px;
+        margin: 10px;
+        padding: 10px;
+        border: 1px solid black;
+      }
+      .drag {
+        background-color: lightgrey;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="zone1"></div>
+
+    <div class="zone2"><div draggable="true" id="drag">A</div></div>
+    <script>
+      let zone1 = document.querySelector(".zone1");
+      let zone2 = document.querySelector(".zone2");
+      let drag = document.querySelector("#drag");
+
+      zone1.ondragover = allowDragOwer;
+      zone2.ondragover = allowDragOwer;
+      function allowDragOwer(e) {
+        e.preventDefault();
+      }
+
+      drag.ondragstart = dragStart;
+      function dragStart(e) {
+        e.dataTransfer.setData("id", e.target.id);
+      }
+
+      zone1.ondrop = drop;
+      zone2.ondrop = drop;
+      function drop(e) {
+        let itemId = e.dataTransfer.getData("id");
+        console.log(itemId);
+        e.target.append(document.getElementById(itemId));
+      }
+    </script>
+  </body>
+</html>
